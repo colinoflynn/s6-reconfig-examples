@@ -1,0 +1,102 @@
+# ----------------------------------------------------------------------------
+#     _____
+#    /     \
+#   /____   \____
+#  / \===\   \==/
+# /___\===\___\/  AVNET Design Resource Center
+#      \======/         www.em.avnet.com/s6microboard
+#       \====/    
+# ----------------------------------------------------------------------------
+# 
+#  Created With Avnet UCF Generator V0.3.0 
+#     Date: Friday, November 12, 2010 
+#     Time: 4:11:53 PM 
+#
+#  Updates
+#     4 Jan 2011 -- added DIPs; changed IOSTANDARD for LEDs and LPDDR
+#	 11 Jan 2011 -- Changed IOSTANDARD for DIPs to LVCMOS33.
+#				    Replaced '#' on the end of net names with '_n'
+#    14 Jan 2011 -- Added I2C for CDCE913 clock chip
+#                   Added formatting and section breaks
+#    27 Jan 2011 -- Updated URL for PMODs
+#    04 Aug 2011 -- Renaming USER_RESET_N to USER_RESET since it is not low-enabled;
+#                   Added extra comment on Ethernet PHY RXD pull-ups
+#                   Removed extraneous quote mark in I2C port syntax
+# 
+#  This design is the property of Avnet.  Publication of this
+#  design is not authorized without written consent from Avnet.
+#  
+#  Please direct any questions to:
+#     Avnet Technical Forums
+#     http://community.em.avnet.com/t5/Spartan-6-LX9-MicroBoard/bd-p/Spartan-6LX9MicroBoard
+#
+#     Avnet Centralized Technical Support
+#     Centralized-Support@avnet.com
+#     1-800-422-9023
+# 
+#  Disclaimer:
+#     Avnet, Inc. makes no warranty for the use of this code or design.
+#     This code is provided  "As Is". Avnet, Inc assumes no responsibility for
+#     any errors, which may appear in this code, nor does it make a commitment
+#     to update the information contained herein. Avnet, Inc specifically
+#     disclaims any implied warranties of fitness for a particular purpose.
+#                      Copyright(c) 2011 Avnet, Inc.
+#                              All rights reserved.
+# 
+# ----------------------------------------------------------------------------
+ 
+############################################################################
+# VCC AUX VOLTAGE 
+############################################################################
+CONFIG VCCAUX=3.3;
+
+############################################################################	
+# User Reset Push Button
+#   Ignore the timing for this signal
+#   Internal pull-down required since external resistor is not populated
+############################################################################	
+NET USER_RESET      LOC = V4  | IOSTANDARD = LVCMOS33 | PULLDOWN;    # "USER_RESET"
+NET USER_RESET      TIG;
+
+############################################################################	
+# Texas Instruments CDCE913 Triple-Output PLL Clock Chip
+#   Y1: 40 MHz, USER_CLOCK can be used as external configuration clock
+#   Y2: 66.667 MHz
+#   Y3: 100 MHz 
+############################################################################	
+NET USER_CLOCK        LOC = V10 | IOSTANDARD = LVCMOS33;               # "USER_CLOCK"
+
+NET USER_CLOCK TNM_NET = USER_CLOCK;
+TIMESPEC TS_USER_CLOCK = PERIOD USER_CLOCK 40000 kHz;
+
+############################################################################	
+# User LEDs			
+############################################################################	
+NET GPIO_LED1         LOC = P4  | IOSTANDARD = LVCMOS18;               # "GPIO_LED1"
+NET GPIO_LED2         LOC = L6  | IOSTANDARD = LVCMOS18;               # "GPIO_LED2"
+
+############################################################################	
+# Silicon Labs CP2102 USB-to-UART Bridge Chip
+############################################################################	
+NET USB_RS232_RXD     LOC = R7  | IOSTANDARD = LVCMOS33;               # "USB_RS232_RXD"
+NET USB_RS232_TXD     LOC = T7  | IOSTANDARD = LVCMOS33;               # "USB_RS232_TXD"
+
+# Connector J5
+NET PMOD1_P1          LOC = F15 | IOSTANDARD = LVCMOS33;               # "PMOD1_P1"
+#NET PMOD1_P2          LOC = F16 | IOSTANDARD = LVCMOS33;               # "PMOD1_P2"
+#NET PMOD1_P3          LOC = C17 | IOSTANDARD = LVCMOS33;               # "PMOD1_P3"
+#NET PMOD1_P4          LOC = C18 | IOSTANDARD = LVCMOS33;               # "PMOD1_P4"
+#NET PMOD1_P7          LOC = F14 | IOSTANDARD = LVCMOS33;               # "PMOD1_P7"
+#NET PMOD1_P8          LOC = G14 | IOSTANDARD = LVCMOS33;               # "PMOD1_P8"
+#NET PMOD1_P9          LOC = D17 | IOSTANDARD = LVCMOS33;               # "PMOD1_P9"
+#NET PMOD1_P10         LOC = D18 | IOSTANDARD = LVCMOS33;               # "PMOD1_P10"
+
+# Connector J4
+#NET PMOD2_P1          LOC = H12 | IOSTANDARD = LVCMOS33;               # "PMOD2_P1"
+#NET PMOD2_P2          LOC = G13 | IOSTANDARD = LVCMOS33;               # "PMOD2_P2"
+#NET PMOD2_P3          LOC = E16 | IOSTANDARD = LVCMOS33;               # "PMOD2_P3"
+#NET PMOD2_P4          LOC = E18 | IOSTANDARD = LVCMOS33;               # "PMOD2_P4"
+#NET PMOD2_P7          LOC = K12 | IOSTANDARD = LVCMOS33;               # "PMOD2_P7"
+#NET PMOD2_P8          LOC = K13 | IOSTANDARD = LVCMOS33;               # "PMOD2_P8"
+#NET PMOD2_P9          LOC = F17 | IOSTANDARD = LVCMOS33;               # "PMOD2_P9"
+#NET PMOD2_P10         LOC = F18 | IOSTANDARD = LVCMOS33;               # "PMOD2_P10"
